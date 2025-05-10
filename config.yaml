@@ -36,7 +36,7 @@ CompileFlags:
 Diagnostics:
   ClangTidy:
     Add: '*'
-    Remove: 'llvmlibc-*'
+    Remove: ['llvmlibc-*', 'fuchsia-*', 'altera-*']
     CheckOptions:
       bugprone-argument-comment.StrictMode: true
       bugprone-argument-comment.CommentBoolLiterals: true
