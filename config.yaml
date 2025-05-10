@@ -1,0 +1,147 @@
+If:
+  PathMatch: [.*\.c, .*\.h]
+
+CompileFlags:
+  Add:
+    - -std=c23
+    - -xc
+  Compiler: clang
+
+---
+
+If:
+  PathMatch: ['.*\.cc', '.*\.hh']
+
+CompileFlags:
+  Add:
+    - -Weffc++
+    - -std=c++11
+    - -xc++
+  Compiler: clang++
+
+---
+
+CompileFlags:
+  Add:
+    - -Werror
+    - -pedantic-errors
+    - -Wall
+    - -Wextra
+    - -Wsign-conversion
+    - -Wconversion
+  Remove: -mabi
+  # my clang version doesn't currently support this setting
+  # BuiltinHeaders: QueryDriver
+
+Diagnostics:
+  ClangTidy:
+    Add: '*'
+    Remove: 'llvmlibc-*'
+    CheckOptions:
+      bugprone-argument-comment.StrictMode: true
+      bugprone-argument-comment.CommentBoolLiterals: true
+      bugprone-argument-comment.CommentIntegerLiterals: true
+      bugprone-argument-comment.CommentFloatLiterals: true
+      bugprone-argument-comment.CommentStringLiterals: true
+      bugprone-argument-comment.CommentCharacterLiterals: true
+      bugprone-argument-comment.CommentUserDefinedLiterals: true
+      bugprone-argument-comment.CommentNullPtrs: true
+      bugprone-misplaced-widening-cast.CheckImplicitCasts: true
+      bugprone-narrowing-conversions.WarnWithinTemplateInstantiation: true
+      bugprone-narrowing-conversions.PedanticMode: true
+      bugprone-sizeof-expression.WarnOnSizeOfIntegerExpression: true
+      bugprone-sizeof-expression.WarnOnSizeOfPointer: true
+      bugprone-suspicious-enum-usage.StrictMode: 1
+      bugprone-tagged-union-member-count.StrictMode: true
+      bugprone-too-small-loop-variable.MagnitudeBitsUpperLimit: 31
+      misc-throw-by-value-catch-by-reference.WarnOnLargeObject: true
+      misc-unused-parameters.StrictMode: true
+      modernize-avoid-bind.PermissiveParameterList: true
+      modernize-deprecated-headers.CheckHeaderFile: true
+      modernize-make-shared.IgnoreDefaultInitialization: false
+      modernize-make-unique.IgnoreDefaultInitialization: false
+      modernize-use-designated-initializers.IgnoreSingleElementAggregates: false
+      modernize-use-std-format.StrictMode: true
+      modernize-use-std-print.StrictMode: true
+      modernize-use-transparent-functors.SafeMode: true
+      performance-for-range-copy.WarnOnAllAutoCopies: true
+      performance-inefficient-string-concatenation.StrictMode: true
+      performance-inefficient-vector-operation.EnableProto: true
+      portability-simd-intrinsics.Suggest: true
+      readability-enum-initial-value.AllowExplicitZeroFirstInitialValue: false
+      readability-enum-initial-value.AllowExplicitSequentialInitialValues: false
+      readability-identifier-naming.AbstractClassCase: lower_case
+      readability-identifier-naming.CheckAnonFieldInParent: true
+      readability-identifier-naming.ClassCase: lower_case
+      readability-identifier-naming.ClassConstantCase: UPPER_CASE
+      readability-identifier-naming.ClassMemberCase: lower_case
+      readability-identifier-naming.ClassMethodCase: lower_case
+      readability-identifier-naming.ConceptCase: lower_case
+      readability-identifier-naming.ConstantCase: lower_case
+      readability-identifier-naming.ConstantMemberCase: UPPER_CASE
+      readability-identifier-naming.ConstantParameterCase: lower_case
+      readability-identifier-naming.ConstantPointerParameterCase: lower_case
+      readability-identifier-naming.ConstexprFunctionCase: lower_case
+      readability-identifier-naming.ConstexprMethodCase: lower_case
+      readability-identifier-naming.ConstexprVariableCase: lower_case
+      readability-identifier-naming.EnumCase: lower_case
+      readability-identifier-naming.EnumConstantCase: lower_case
+      readability-identifier-naming.FunctionCase: lower_case
+      readability-identifier-naming.GlobalConstantCase: UPPER_CASE
+      readability-identifier-naming.GlobalConstantPointerCase: UPPER_CASE
+      readability-identifier-naming.GlobalFunctionCase: lower_case
+      readability-identifier-naming.GlobalPointerCase: lower_case
+      readability-identifier-naming.GlobalVariableCase: lower_case
+      readability-identifier-naming.InlineNamespaceCase: lower_case
+      readability-identifier-naming.LocalConstantCase: lower_case
+      readability-identifier-naming.LocalConstantPointerCase: lower_case
+      readability-identifier-naming.LocalPointerCase: lower_case
+      readability-identifier-naming.LocalVariableCase: lower_case
+      readability-identifier-naming.MacroDefinitionCase: UPPER_CASE
+      readability-identifier-naming.MemberCase: lower_case
+      readability-identifier-naming.MethodCase: lower_case
+      readability-identifier-naming.NamespaceCase: lower_case
+      readability-identifier-naming.ParameterCase: lower_case
+      readability-identifier-naming.ParameterPackCase: lower_case
+      readability-identifier-naming.PointerParameterCase: lower_case
+      readability-identifier-naming.PrivateMemberCase: lower_case
+      readability-identifier-naming.PrivateMethodCase: lower_case
+      readability-identifier-naming.ProtectedMemberCase: lower_case
+      readability-identifier-naming.ProtectedMethodCase: lower_case
+      readability-identifier-naming.PublicMemberCase: lower_case
+      readability-identifier-naming.PublicMethodCase: lower_case
+      readability-identifier-naming.ScopedEnumConstantCase: lower_case
+      readability-identifier-naming.StaticConstantCase: lower_case
+      readability-identifier-naming.StaticVariableCase: lower_case
+      readability-identifier-naming.StructCase: lower_case
+      readability-identifier-naming.TemplateParameterCase: lower_case
+      readability-identifier-naming.TemplateTemplateParameterCase: lower_case
+      readability-identifier-naming.TypeAliasCase: lower_case
+      readability-identifier-naming.TypedefCase: lower_case
+      readability-identifier-naming.TypeTemplateParameterCase: lower_case
+      readability-identifier-naming.UnionCase: lower_case
+      readability-identifier-naming.ValueTemplateParameterCase: lower_case
+      readability-identifier-naming.VariableCase: lower_case
+      readability-identifier-naming.VirtualMethodCase: lower_case
+      readability-inconsistent-declaration-parameter-name.Strict: true
+      readability-operators-representation.BinaryOperators: 'and;and_eq;bitand;bitor;compl;not;not_eq;or;or_eq;xor;xor_eq'
+      readability-operators-representation.OverloadedOperators: 'and;and_eq;bitand;bitor;compl;not;not_eq;or;or_eq;xor;xor_eq'
+      readability-redundant-access-specifiers.CheckFirstDeclaration: true
+      readability-redundant-inline-specifier.StrictMode: true
+      readability-simplify-boolean-expr.ChainedConditionalReturn: true
+      readability-simplify-boolean-expr.ChainedConditionalAssignment: true
+    FastCheckFilter: None
+  MissingIncludes: Strict
+
+InlayHints:
+  Enabled: true
+  ParameterNames: true
+  DeducedTypes: true
+  Designators: true
+  BlockEnd: true
+  # my clang version doesn't currently support this setting
+  # DefaultArguments: true
+  TypeNameLimit: 0
+
+Hover:
+  ShowAKA: true
